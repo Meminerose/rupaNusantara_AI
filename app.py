@@ -29,6 +29,10 @@ import config
 import face_utils
 import models
 
+import os
+import gdown
+import streamlit as st
+
 
 # ---------------------------------------------------------------------------
 # Page setup
@@ -51,6 +55,30 @@ def get_ice_servers():
     except Exception as e:
         st.warning(f"Twilio credentials tidak valid/ditemukan. Menggunakan STUN Google bawaan.")
         return [{"urls": ["stun:stun.l.google.com:19302"]}]
+    
+def load_models_from_gdrive():
+    os.makedirs("checkpoints", exist_ok=True)
+    
+    path_etnis = "checkpoints/model_etnis.pth"
+    path_emosi = "checkpoints/model_emosi.pth"
+    
+    id_etnis = "1S7YdkPaI-KQw0SMaNNcKIdd8rf3re2nG"
+    id_emosi = "14L2jn5BSkGi0OSeET4lBHqYQgz9PiKuI"
+    
+    # Download model jika belum ada
+    if not os.path.exists(path_etnis):
+        with st.spinner("Mengunduh model etnis dari brankas cloud... Mohon tunggu sebentar."):
+            url_etnis = f"https://drive.google.com/uc?id={id_etnis}"
+            gdown.download(url_etnis, path_etnis, quiet=False)
+            
+    if not os.path.exists(path_emosi):
+        with st.spinner("Mengunduh model emosi dari brankas cloud... Mohon tunggu sebentar."):
+            url_emosi = f"https://drive.google.com/uc?id={id_emosi}"
+            gdown.download(url_emosi, path_emosi, quiet=False)
+            
+    return path_etnis, path_emosi
+
+model_etnis_path, model_emosi_path = load_models_from_gdrive()
 
 RTC_CONFIGURATION = RTCConfiguration(
     {"iceServers": get_ice_servers()}
