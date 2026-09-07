@@ -1,0 +1,10 @@
+# Mengabaikan folder konfigurasi dan rahasia Streamlit
+.streamlit/secrets.toml
+
+# Mengabaikan folder konfigurasi dan rahasia Streamlit
+.streamlit/secrets.toml
+
+# Opsional: Jika kamu mau sekalian mengabaikan file cache Python dan lingkungan virtual
+__pycache__/
+venv/
+.env
