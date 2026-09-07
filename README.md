@@ -26,7 +26,7 @@ Ada 2 mode di sidebar:
 ## Struktur project
 
 ```
-roro-jonggrang-app/
+rupaNusantaraAI/
 ├── app.py           # UI Streamlit + orkestrasi pipeline
 ├── models.py        # arsitektur, loading checkpoint, fungsi predict()
 ├── face_utils.py     # deteksi multi-wajah (MediaPipe) + gambar bounding box
